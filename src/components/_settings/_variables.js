@@ -1,0 +1,26 @@
+export const color = {
+  WHITE: '#FFFFFF',
+  BLACK: '#333333',
+  DARK_TURQUOISE: '#00D3CA',
+  CRIMSON: '#F62E5F',
+  CORN_FLOWER_BLUE: '#6EB2FB',
+  ORANGE_RED: '#FE5B08',
+  GOLD: '#F8E71D',
+  YELLOW_GREEN: '#7ED322',
+  BLUE_VIOLET: '#9016FE',
+  LAVENDER: '#E8E7E8',
+  DARK_SLATE_GREY: '#404040',
+  DIM_GREY: '#595959',
+};
+
+export const fontFamily = {
+  OPEN_SANS: '\'Open Sans\', sans-serif',
+  MONTSERRAT: '\'Montserrat\', sans-serif',
+  PLAY_FAIR: '\'Playfair Display\', serif',
+};
+
+export const fontWeight = {
+  LIGHT: 300,
+  BASE: 400,
+  BOLD: 600,
+};
