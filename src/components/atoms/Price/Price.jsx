@@ -14,9 +14,14 @@ const Wrapper = styled.p`
   font-family: 'Montserrat', sans-serif;
   font-weight: ${fontWeight.BOLD};
   color: ${color.CRIMSON};
+  margin: .2em;
 `;
 
-const Price = ({ size, children }) => (<Wrapper size={size}>{ children }</Wrapper>);
+const Price = ({ size, children }) => (
+  <Wrapper size={size}>
+    { `$${children}` }
+  </Wrapper>
+);
 
 Price.propTypes = {
   size: PropTypes.string,

@@ -1,0 +1,5 @@
+Banner example:
+
+```jsx
+<Banner />
+```

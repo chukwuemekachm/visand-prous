@@ -9,8 +9,9 @@ export const color = {
   YELLOW_GREEN: '#7ED322',
   BLUE_VIOLET: '#9016FE',
   LAVENDER: '#E8E7E8',
-  DARK_SLATE_GREY: '#404040',
+  DARK_SLATE_GREY: '#2E2E2E',
   DIM_GREY: '#595959',
+  DARK_GREY: '#969696',
 };
 
 export const fontFamily = {
