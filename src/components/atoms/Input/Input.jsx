@@ -15,6 +15,7 @@ Wrapper.Input = styled.input`
   font-family: sans-serif;
   font-weight: 600;
   letter-spacing: .1em;
+  background-color: transparent;
 `;
 
 const Input = ({ value, handleChange, placeHolder }) => (

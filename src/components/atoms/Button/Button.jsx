@@ -45,7 +45,7 @@ Wrapper.default = styled(Wrapper)`
 `;
 
 Wrapper.rounded = styled(Wrapper)`
-  padding: ${({ size }) => (size === ButtonSize.MEDIUM ? '.9em 1.5em' : '1.1em 2.5em')};
+  padding: ${({ size }) => (size === ButtonSize.MEDIUM ? '.9em 1.5em' : '1.1em 3.5em')};
   border-radius: 2em;
   font-size: 1em;
   font-weight: ${fontWeight.BASE};

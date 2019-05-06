@@ -7,7 +7,7 @@ import { color, fontFamily, fontWeight } from '../../_settings/_variables';
 
 
 const Wrapper = styled.span`
-  padding: .8em .1em .7em 1em;
+  padding: .31em .1em .21em 1em;
   border: .1em solid ${color.LAVENDER};
   border-radius: 2em;
 
@@ -20,7 +20,7 @@ const Wrapper = styled.span`
 
 Wrapper.Select = styled.select`
   font-size: 1em;
-  width: 5.5em;
+  width: 4em;
   border: none;
   background-color: transparent;
   color: ${color.DIM_GREY};
@@ -39,7 +39,8 @@ const Select = ({ options }) => (
   <Wrapper>
     <Wrapper.Select>
       {
-        options.map(option => (<Wrapper.Option value={option}>{option}</Wrapper.Option>))
+        options
+          .map(option => (<Wrapper.Option key={option} value={option}>{option}</Wrapper.Option>))
       }
     </Wrapper.Select>
     <Icon iconName="arrow-down" />

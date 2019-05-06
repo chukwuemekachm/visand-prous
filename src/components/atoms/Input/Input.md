@@ -1,5 +1,5 @@
 Input example:
 
 ```jsx
-<Input value="Shirt" />
+<Input placeHolder="enter your value" />
 ```
