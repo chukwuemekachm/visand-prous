@@ -18,12 +18,13 @@ Wrapper.Input = styled.input`
   background-color: transparent;
 `;
 
-const Input = ({ value, handleChange, placeHolder }) => (
+const Input = ({ value, handleChange, placeHolder, handleEnter }) => (
   <Wrapper>
     <Wrapper.Input
       value={value}
       onChange={handleChange}
       placeholder={placeHolder}
+      onKeyUp={handleEnter}
     />
   </Wrapper>
 );
@@ -32,11 +33,13 @@ Input.propTypes = {
   value: PropTypes.string.isRequired,
   handleChange: PropTypes.func,
   placeHolder: PropTypes.string,
+  handleEnter: PropTypes.func,
 };
 
 Input.defaultProps = {
   handleChange: () => true,
   placeHolder: 'Search',
+  handleEnter: () => true,
 };
 
 

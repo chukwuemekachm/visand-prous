@@ -24,6 +24,7 @@ const Wrapper = styled.button`
   letter-spacing: .01em;
   font-family: ${fontFamily.OPEN_SANS};
   outline: none;
+  box-sizing: border-box;
 
   :hover {
     cursor: pointer;
@@ -31,7 +32,8 @@ const Wrapper = styled.button`
 `;
 
 Wrapper.default = styled(Wrapper)`
-  padding: .3em 1.6em;
+  width: 100%;
+  padding: .3em 0;
   border-radius: .1em;
   font-size: 1.1em;
   font-weight: ${fontWeight.LIGHT};
@@ -62,13 +64,14 @@ Wrapper.rounded = styled(Wrapper)`
 
 const Button = (props) => {
   const {
-    type, size, theme, children,
+    type, size, theme, children, handleClick,
   } = props;
   const MyButton = Wrapper[type];
   return (
     <MyButton
       size={size}
       theme={theme}
+      onClick={handleClick}
     >
       {children}
     </MyButton>
@@ -80,12 +83,14 @@ Button.propTypes = {
   size: PropTypes.string,
   theme: PropTypes.string,
   children: PropTypes.node.isRequired,
+  handleClick: PropTypes.func,
 };
 
 Button.defaultProps = {
   type: ButtonType.DEFAULT,
   size: ButtonSize.MEDIUM,
   theme: ButtonTheme.PRIMARY,
+  handleClick: () => true,
 };
 
 export default Button;

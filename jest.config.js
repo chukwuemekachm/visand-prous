@@ -14,4 +14,8 @@ module.exports = {
   snapshotSerializers: [
     'enzyme-to-json/serializer',
   ],
+  transform: {
+    '^.+\\.jsx?$': 'babel-jest',
+  },
+
 };

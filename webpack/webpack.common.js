@@ -6,7 +6,7 @@ const DIST_DIR = path.join(__dirname, './dist');
 const SRC_DIR =  './src';
 
 module.exports = {
-  entry: `${SRC_DIR}/index.js`,
+  entry: ['@babel/polyfill', `${SRC_DIR}/index.js`],
   output: {
     path: DIST_DIR,
     filename: '[name].chunk.js',
@@ -37,11 +37,16 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+            presets: [[
+              "@babel/preset-env", {
+                "useBuiltIns": "entry"
+              }],
+              "@babel/preset-react"],
             plugins: [
               '@babel/plugin-proposal-object-rest-spread',
               '@babel/plugin-transform-arrow-functions',
               '@babel/plugin-proposal-class-properties',
+              '@babel/plugin-transform-regenerator',
             ],
           },
         },

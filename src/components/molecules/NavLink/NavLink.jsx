@@ -32,7 +32,7 @@ NavLink.propTypes = {
 };
 
 NavLink.defaultProps = {
-  url: '/about',
+  url: '/',
 };
 
 export default NavLink;

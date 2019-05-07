@@ -27,29 +27,35 @@ const Wrapper = styled.span`
   ${({ backGround }) => (backGround ? extraCss : '')};
 `;
 
-const Icon = ({
-  iconName, size, color, backGround,
-}) => (
-  <Wrapper
-    size={size}
-    color={color}
-    backGround={backGround}
-  >
-    <i className={`icon ion-ios-${iconName}`} />
-  </Wrapper>
-);
+function Icon(props) {
+  const {
+    children, size, color, backGround, handleClick,
+  } = props;
+  return (
+    <Wrapper
+      size={size}
+      color={color}
+      backGround={backGround}
+      onClick={handleClick}
+    >
+      { children }
+    </Wrapper>
+  );
+}
 
 Icon.propTypes = {
   size: PropTypes.string,
-  iconName: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   color: PropTypes.string,
   backGround: PropTypes.bool,
+  handleClick: PropTypes.func,
 };
 
 Icon.defaultProps = {
   size: IconSize.MEDIUM,
   color: colors.BLACK,
   backGround: false,
+  handleClick: () => true,
 };
 
 export default Icon;
