@@ -1,6 +1,7 @@
 Icon examples:
 
 ```jsx
+import { IoIosArrowBack } from 'react-icons/fa';
 <Icon iconName="close" />
 <br />
 <br />

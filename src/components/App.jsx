@@ -1,43 +1,27 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
+import store from '../store/configureStore';
 import NavBar from './organisms/NavBar/NavBar';
-import Banner from './molecules/Banner/Banner';
-import Item from './molecules/Item/Item';
-import Flex from './_layouts/Flex';
-
-
-const item = {
-  thumbnail: 'https://www.w3schools.com/w3images/jeans2.jpg',
-  price: '16.00',
-  name: 'Mega Ripped Jeans',
-};
-const item2 = {
-  thumbnail: 'https://www.w3schools.com/w3images/jeans1.jpg',
-  price: '14.00',
-  name: 'Ripped Skinny Jeans',
-};
+import Catalog from './templates/Catalog/Catalog';
+import Footer from './molecules/Footer/Footer';
+import GlobalStyles from './_settings/_global_styles';
 
 function App() {
   return (
-    <div>
+    <Provider store={store}>
       <BrowserRouter>
         <div>
           <NavBar />
-          <Banner />
-          <Flex justifyContent="space-around">
-            <Item item={item} />
-            <Item item={item2} />
-            <Item item={item} />
-            <Item item={item} />
-            <Item item={item2} />
-            <Item item={item} />
-            <Item item={item} />
-            <Item item={item} />
-          </Flex>
+          <Switch>
+            <Route path="/" exact render={props => <Catalog {...props} />} />
+          </Switch>
+          <Footer />
+          <GlobalStyles />
         </div>
       </BrowserRouter>
-    </div>
+    </Provider>
   );
 }
 

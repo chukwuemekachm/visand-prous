@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { FaShoppingBag } from 'react-icons/lib/fa';
 
 import Icon from '../../atoms/Icon/Icon';
 import { color, fontFamily, fontWeight } from '../../_settings/_variables';
 
 const Wrapper = styled.span`
-  .ion-ios-cart:before {
-    font-size: 1.5em;
-    font-weight: ${fontWeight.BOLD};
+  .svg {
+    width: 5em;
+    height: 5em;
   }
 `;
 
@@ -22,8 +23,8 @@ Wrapper.Count = styled.span`
   font-weight: ${fontWeight.BOLD};
   font-family: ${fontFamily.OPEN_SANS};
   position: relative;
-  right: .6em;
-  bottom: 1.4em;
+  right: .8em;
+  bottom: .9em;
 
   :hover {
     cursor: pointer;
@@ -34,7 +35,9 @@ Wrapper.Count = styled.span`
 
 const CartCount = ({ itemCount, handleClick }) => (
   <Wrapper onClick={handleClick}>
-    <Icon iconName="cart" color="LAVENDER" />
+    <Icon color="LAVENDER">
+      <FaShoppingBag />
+    </Icon>
     <Wrapper.Count>{ itemCount }</Wrapper.Count>
   </Wrapper>
 );

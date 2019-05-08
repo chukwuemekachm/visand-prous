@@ -25,3 +25,8 @@ export const fontWeight = {
   BASE: 400,
   BOLD: 600,
 };
+
+export const screenSizes = {
+  MOBILE: '600px',
+  TABLET: '769px',
+};

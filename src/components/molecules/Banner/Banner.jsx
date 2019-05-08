@@ -6,14 +6,18 @@ import SubHeader from '../../atoms/SubHeader/SubHeader';
 import Button, { ButtonSize, ButtonType, ButtonTheme } from '../../atoms/Button/Button';
 import { color, fontWeight } from '../../_settings/_variables';
 
+const imageUrl = 'https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
+
 const Wrapper = styled.section`
-  background-image: url('https://www.w3schools.com/w3images/jeans.jpg');
+  background-image: url(${imageUrl});
   background-repeat: no-repeat;
   background-size: cover;
+  width: 100%;
+  margin: 2em auto;
 `;
 
 Wrapper.Overlay = styled.div`
-  padding: 6em 4em;
+  padding: 8em 4em;
   background-color: rgba(0, 0, 0, 0.6);
 
   h1 {
