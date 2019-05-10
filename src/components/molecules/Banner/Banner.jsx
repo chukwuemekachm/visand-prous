@@ -6,12 +6,12 @@ import SubHeader from '../../atoms/SubHeader/SubHeader';
 import Button, { ButtonSize, ButtonType, ButtonTheme } from '../../atoms/Button/Button';
 import { color, fontWeight } from '../../_settings/_variables';
 
-const imageUrl = 'https://images.pexels.com/photos/428338/pexels-photo-428338.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260';
+const imageUrl = 'https://colorlib.com/preview/theme/selling/images/hero_2.jpg';
 
 const Wrapper = styled.section`
   background-image: url(${imageUrl});
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: center;
   width: 100%;
   margin: 2em auto;
 `;

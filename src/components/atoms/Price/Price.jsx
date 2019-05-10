@@ -10,7 +10,7 @@ export const PriceSize = {
 };
 
 const Wrapper = styled.p`
-  font-size: ${({ size }) => (size === PriceSize.MEDIUM ? '1.53em' : '2em')};
+  font-size: ${({ size }) => (size === PriceSize.MEDIUM ? '1.48em' : '2em')};
   font-family: 'Montserrat', sans-serif;
   font-weight: ${fontWeight.BOLD};
   color: ${color.CRIMSON};

@@ -23,8 +23,8 @@ Wrapper.Count = styled.span`
   font-weight: ${fontWeight.BOLD};
   font-family: ${fontFamily.OPEN_SANS};
   position: relative;
-  right: .8em;
-  bottom: .9em;
+  right: .75em;
+  bottom: .6em;
 
   :hover {
     cursor: pointer;

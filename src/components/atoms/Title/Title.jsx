@@ -6,7 +6,7 @@ import { fontFamily, fontWeight } from '../../_settings/_variables';
 
 export const Wrapper = styled.h3`
   font-family: ${fontFamily.OPEN_SANS};
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: ${fontWeight.BOLD};
   letter-spacing: 0em;
 `;

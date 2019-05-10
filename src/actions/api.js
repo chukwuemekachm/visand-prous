@@ -4,6 +4,7 @@ const { API_URL = 'https://visand-t-shirt-shop.herokuapp.com/api/v1' } = process
 
 const api = axios.create({
   baseURL: API_URL,
+  headers: { 'Content-Type': 'application/json' },
 });
 
 export default api;

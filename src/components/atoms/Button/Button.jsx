@@ -47,18 +47,18 @@ Wrapper.default = styled(Wrapper)`
 `;
 
 Wrapper.rounded = styled(Wrapper)`
-  padding: ${({ size }) => (size === ButtonSize.MEDIUM ? '.9em 1.5em' : '1.1em 3.5em')};
+  padding: ${({ size }) => (size === ButtonSize.MEDIUM ? '.6em 1.4em' : '1.1em 3.5em')};
   border-radius: 2em;
   font-size: 1em;
   font-weight: ${fontWeight.BASE};
   background-color: ${({ theme }) => (theme === ButtonTheme.PRIMARY ? color.CRIMSON : color.WHITE)};
   color: ${({ theme }) => (theme === ButtonTheme.PRIMARY ? color.WHITE : color.CRIMSON)};
+  border: .7px solid ${({ size }) => (size === ButtonSize.MEDIUM ? color.CRIMSON : color.WHITE)};
 
   :hover {
     background-color: ${({ theme }) => (theme === ButtonTheme.PRIMARY ? color.WHITE : color.CRIMSON)};
     color: ${({ theme }) => (theme === ButtonTheme.PRIMARY ? color.CRIMSON : color.WHITE)};
     border: .7px solid ${color.CRIMSON};
-    box-sizing: border-box;
   }
 `;
 
