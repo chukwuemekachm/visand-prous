@@ -10,22 +10,22 @@ import { color, screenSizes } from '../../_settings/_variables';
 
 const Wrapper = styled.span`
   width: 19em;
-  padding: .4em 1.3em;
+  padding: .14em 1em .22em 1em;
   display: inline-flex;
   align-items: center;
   border: none;
-  border-radius: 3em;
-  background-color: ${color.DARK_GREY};
+  border-radius: .1em;
+  background-color: ${color.LAVENDER};
   margin: 0em 2em;
+  color: ${color.DARK_GREY};
 
   span:last-child svg {
     cursor: pointer;
   }
   
   input, input::placeholder {
-    color: ${color.WHITE};
+    color: ${color.DARK_GREY};
   }
-  color: ${color.WHITE};
 
   @media (max-width: ${screenSizes.TABLET}) {
     width: 80%;

@@ -2,13 +2,13 @@ const itemName = 'visand-prous-shop';
 
 export const saveState = (state) => {
   const serialisedState = JSON.stringify(state);
-  window.localStorage.setItem(itemName, serialisedState);
+  window.sessionStorage.setItem(itemName, serialisedState);
 };
 
 export const loadState = () => {
-  const state = window.localStorage.getItem(itemName);
+  const state = window.sessionStorage.getItem(itemName);
   const parsedState = state !== null && state !== undefined ? JSON.parse(state) : undefined;
   return parsedState;
 };
 
-export const clearState = () => window.localStorage.removeItem(itemName);
+export const clearState = () => window.sessionStorage.removeItem(itemName);

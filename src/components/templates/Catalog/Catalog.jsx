@@ -14,6 +14,7 @@ import {
   getDepartments,
   getCategoryProducts,
 } from '../../../actions/catalog';
+import { addItemToCart } from '../../../actions/cart';
 
 const Wrapper = styled.div`
   width: 95%;
@@ -24,7 +25,7 @@ const Wrapper = styled.div`
   }
 `;
 
-class Catalog extends Component {
+export class Catalog extends Component {
   state = {
     selectedDepartmentId: 1,
     selectedCategoryId: 0,
@@ -65,6 +66,15 @@ class Catalog extends Component {
     }
   };
 
+  handleAddToCart = async (productId) => {
+    try {
+      const { addItemToCart } = this.props;
+      await addItemToCart({ productId });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   render() {
     const { departments = [], categories = [], products = [] } = this.props;
     const { selectedDepartmentId, selectedCategoryId } = this.state;
@@ -81,7 +91,13 @@ class Catalog extends Component {
             handleDepartmentClick={this.handleDepartmentClick}
           />
           {
-            products.map((product) => <Item key={product.productId} item={product} />)
+            products.map((product) => (
+              <Item
+                handleAddItemToCart={this.handleAddToCart}
+                key={product.productId}
+                item={product}
+              />
+            ))
           }
         </Flex>
       </Wrapper>
@@ -100,6 +116,7 @@ export const mapDispatchToProps = dispatch => ({
   getDepartmentCategories: departmentId => dispatch(getDepartmentCategories(departmentId)),
   getDepartments: () => dispatch(getDepartments()),
   getCategoryProducts: categoryId => dispatch(getCategoryProducts(categoryId)),
+  addItemToCart: itemId => dispatch(addItemToCart(itemId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog);

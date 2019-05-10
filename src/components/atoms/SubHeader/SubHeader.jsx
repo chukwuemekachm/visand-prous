@@ -6,10 +6,12 @@ import { fontFamily } from '../../_settings/_variables';
 
 const Wrapper = styled.h2`
   font-family: ${fontFamily.OPEN_SANS};
-  font-size: 2em;
+  font-size: 1.5em;
 `;
 
-const SubHeader = ({ children }) => (<Wrapper>{ children }</Wrapper>);
+function SubHeader({ children }) {
+  return <Wrapper>{ children }</Wrapper>;
+}
 
 SubHeader.propTypes = {
   children: PropTypes.node.isRequired,

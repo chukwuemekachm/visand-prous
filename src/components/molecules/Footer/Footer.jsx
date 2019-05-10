@@ -15,7 +15,7 @@ import { color } from '../../_settings/_variables';
 
 const Wrapper = styled.footer`
   margin-top: 1em;
-  padding: 4em 0em;
+  padding: 2.5em 0em;
   background-color: ${color.DARK_SLATE_GREY};
 
   [display="flex"] {
@@ -24,9 +24,9 @@ const Wrapper = styled.footer`
 
   svg {
     background-color: ${color.LAVENDER};
-    padding: .5em;
+    padding: .38em;
     border-radius: 3em;
-    font-size: 1.5em;
+    font-size: 1em;
     margin: 1em .5em
   }
 

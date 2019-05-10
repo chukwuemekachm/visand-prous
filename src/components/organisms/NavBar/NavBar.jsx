@@ -11,9 +11,10 @@ import Flex from '../../_layouts/Flex';
 import { color, screenSizes } from '../../_settings/_variables';
 
 import { getCatalog } from '../../../actions/catalog';
+import { getCartDetails } from '../../../actions/cart';
 
 const Wrapper = styled.nav`
-  padding: 1.2em 2em;
+  padding: .4em 2em;
   background-color: ${color.DARK_SLATE_GREY};
   width: 100%;
   box-sizing: border-box;
@@ -33,6 +34,7 @@ const Wrapper = styled.nav`
     h3, h3 a {
       width: 100%;
     }
+    padding: 1em 2em;
   }
 `;
 
@@ -40,6 +42,15 @@ export class NavBar extends Component {
   state = {
     search: '',
   };
+
+  async componentDidMount() {
+    try {
+      const { getCartDetails } = this.props;
+      await getCartDetails();
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   handleChange = ({ target: { value } }) => this.setState({ search: value });
 
@@ -58,7 +69,7 @@ export class NavBar extends Component {
   }
 
   render() {
-    const { itemCount = 0 } = this.props;
+    const { items } = this.props;
     const { search } = this.state;
     return (
       <Wrapper>
@@ -82,7 +93,7 @@ export class NavBar extends Component {
               handleClear={this.handleClear}
               handleEnter={this.handleSubmit}
             />
-            <CartCount itemCount={itemCount} />
+            <CartCount itemCount={items.length} />
           </Flex>
         </Flex>
       </Wrapper>
@@ -90,10 +101,13 @@ export class NavBar extends Component {
   }
 }
 
-export const mapStateToProps = state => ({});
+export const mapStateToProps = state => ({
+  items: state.cart.items,
+});
 
 export const mapDispatchToProps = dispatch => ({
   getCatalog: search => dispatch(getCatalog(search)),
+  getCartDetails: () => dispatch(getCartDetails()),
 });
 
-export default connect(null, mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
