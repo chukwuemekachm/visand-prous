@@ -9,7 +9,7 @@
     "build:client-dev": "rm -rf client/dist && webpack-dev-server --open --env.mode development",
     "build:client-prod": "rm -rf client/dist && webpack --env.mode production",
     "prestart": "npm run build:client-prod",
-    "start": "echo 'Start script not specified' && exit 1",
+    "start": "node src/server.js",
     "dev": "npm run build:client-dev && rm -rf client/dist && webpack-dev-server --env.mode development --open --hot",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build",
@@ -65,6 +65,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
+    "express": "^4.16.4",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
     "react": "^16.8.0-alpha.1",
@@ -74,6 +75,7 @@
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "toastr": "^2.1.4"
   }
 }

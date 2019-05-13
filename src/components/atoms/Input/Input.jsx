@@ -18,28 +18,42 @@ Wrapper.Input = styled.input`
   background-color: transparent;
 `;
 
-const Input = ({ value, handleChange, placeHolder, handleEnter }) => (
-  <Wrapper>
-    <Wrapper.Input
-      value={value}
-      onChange={handleChange}
-      placeholder={placeHolder}
-      onKeyUp={handleEnter}
-    />
-  </Wrapper>
-);
+function Input(props) {
+  const {
+    value, handleChange, placeHolder, handleEnter, name, required, type,
+  } = props;
+  return (
+    <Wrapper>
+      <Wrapper.Input
+        value={value}
+        onChange={handleChange}
+        placeholder={placeHolder}
+        onKeyUp={handleEnter}
+        name={name}
+        required={required}
+        type={type}
+      />
+    </Wrapper>
+  );
+}
 
 Input.propTypes = {
   value: PropTypes.string.isRequired,
   handleChange: PropTypes.func,
   placeHolder: PropTypes.string,
   handleEnter: PropTypes.func,
+  name: PropTypes.string,
+  required: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 Input.defaultProps = {
   handleChange: () => true,
   placeHolder: 'Search',
   handleEnter: () => true,
+  name: 'search',
+  required: false,
+  type: 'text',
 };
 
 

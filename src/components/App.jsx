@@ -9,6 +9,7 @@ import NavBar from './organisms/NavBar/NavBar';
 import Catalog from './templates/Catalog/Catalog';
 import Product from './templates/Product/Product';
 import Login from './templates/Login/Login';
+import Signup from './templates/Signup/Signup';
 import Footer from './molecules/Footer/Footer';
 import GlobalStyles from './_settings/_global_styles';
 
@@ -21,6 +22,7 @@ function App() {
           <Switch>
             <Route path="/" exact render={props => <Catalog {...props} />} />
             <Route path="/login" exact render={props => <Login {...props} />} />
+            <Route path="/signup" exact render={props => <Signup {...props} />} />
             <Route path="/:productId" render={props => <Product {...props} />} />
             <Redirect to="/" />
           </Switch>
