@@ -3,6 +3,7 @@ import {
   SET_DEPARTMENTS,
   SET_CATEGORIES,
   SET_CATEGORY_PRODUCTS,
+  SET_PRODUCT_DETAILS,
 } from '../constants';
 
 const initialState = {
@@ -34,6 +35,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         filteredProducts: action.products,
+      };
+    case SET_PRODUCT_DETAILS:
+      return {
+        ...state,
+        product: action.product,
       };
     default:
       return state;

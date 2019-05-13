@@ -10,7 +10,7 @@ export const IconSize = {
 };
 
 const extraCss = css`
-  padding: .4em .7em .19em .7em;
+  padding: .16em .27em .25em .27em;
   border-radius: 3em;
   background-color: ${colors.LAVENDER};
   

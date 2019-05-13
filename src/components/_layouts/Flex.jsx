@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   flex-direction: ${({ flexDirection }) => flexDirection};
 `;
 
-const Flex = (props) => {
+function Flex(props) {
   const {
     children, display, justifyContent, alignItems, flexWrap, flexDirection,
   } = props;
@@ -25,13 +25,13 @@ const Flex = (props) => {
       {children}
     </Wrapper>
   );
-};
+}
 
 Flex.propTypes = {
   children: PropTypes.node.isRequired,
   display: PropTypes.oneOf(['flex', 'inline-flex']),
   justifyContent: PropTypes
-    .oneOf(['center', 'flex-start', 'flex-end', 'space-around', 'space-between']),
+    .oneOf(['center', 'flex-start', 'flex-end', 'space-around', 'space-between', 'space-evenly']),
   alignItems: PropTypes
     .oneOf(['center', 'flex-start', 'flex-end', 'stretch', 'baseline']),
   flexWrap: PropTypes.oneOf(['wrap', 'nowrap', 'wrap-reverse']),

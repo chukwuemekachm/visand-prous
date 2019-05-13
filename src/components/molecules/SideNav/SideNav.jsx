@@ -15,6 +15,7 @@ const Wrapper = styled.section`
 
   button {
     margin-top: .3em;
+    width: 90%;
   }
 `;
 
