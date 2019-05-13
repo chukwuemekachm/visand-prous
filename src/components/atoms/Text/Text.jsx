@@ -17,7 +17,7 @@ function Text({ children, color }) {
 }
 
 Text.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   color: PropTypes.string,
 };
 
