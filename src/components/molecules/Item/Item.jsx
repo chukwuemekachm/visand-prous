@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Image from '../../atoms/Image/Image';
 import Title from '../../atoms/Title/Title';
@@ -21,6 +22,11 @@ const Wrapper = styled.figure.attrs({
   text-align: center;
   align-items: center;
   box-sizing: border-box;
+
+  a {
+    text-decoration: none;
+    width: 100%;
+  }
 
   img {
     width: 100%;
@@ -59,8 +65,12 @@ const Item = ({ item, handleAddItemToCart }) => {
   const isLow = Number.parseFloat(price) < 15.00;
   return (
     <Wrapper>
-      <Image src={`https://${thumbnail}`} />
-      <Title>{name}</Title>
+      <Link to={`/${productId}`}>
+        <Image src={`https://${thumbnail}`} />
+      </Link>
+      <Link to={`/${productId}`}>
+        <Title>{name}</Title>
+      </Link>
       <Text>{description}</Text>
       {
         isLow
@@ -70,7 +80,7 @@ const Item = ({ item, handleAddItemToCart }) => {
               handleClick={() => handleAddItemToCart(productId)}
               type={ButtonType.ROUNDED}
             >
-              Buy now
+              Add To Cart
             </Button>
           )
       }

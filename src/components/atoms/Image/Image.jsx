@@ -7,10 +7,15 @@ const Wrapper = styled.img`
   height: auto;
 `;
 
-const Image = ({ src }) => (<Wrapper src={src} />);
+const Image = ({ src, handleClick }) => (<Wrapper onClick={handleClick} src={src} />);
 
 Image.propTypes = {
   src: PropTypes.string.isRequired,
+  handleClick: PropTypes.func,
+};
+
+Image.defaultProps = {
+  handleClick: () => true,
 };
 
 export default Image;

@@ -32,8 +32,7 @@ const Wrapper = styled.button`
 `;
 
 Wrapper.default = styled(Wrapper)`
-  width: 100%;
-  padding: .3em 0;
+  padding: .3em 1.5em;
   border-radius: .1em;
   font-size: 1.1em;
   font-weight: ${fontWeight.LIGHT};

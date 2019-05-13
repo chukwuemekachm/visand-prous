@@ -81,7 +81,7 @@ export class Catalog extends Component {
     return (
       <Wrapper>
         <Banner />
-        <Flex justifyContent="space-between">
+        <Flex justifyContent="space-evenly">
           <SideNav
             departments={departments}
             categories={categories}
@@ -116,7 +116,7 @@ export const mapDispatchToProps = dispatch => ({
   getDepartmentCategories: departmentId => dispatch(getDepartmentCategories(departmentId)),
   getDepartments: () => dispatch(getDepartments()),
   getCategoryProducts: categoryId => dispatch(getCategoryProducts(categoryId)),
-  addItemToCart: itemId => dispatch(addItemToCart(itemId)),
+  addItemToCart: item => dispatch(addItemToCart(item)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog);

@@ -12,6 +12,7 @@ import { color, screenSizes } from '../../_settings/_variables';
 
 import { getCatalog } from '../../../actions/catalog';
 import { getCartDetails } from '../../../actions/cart';
+import { getItemsCount } from '../../../utils';
 
 const Wrapper = styled.nav`
   padding: .4em 2em;
@@ -93,7 +94,13 @@ export class NavBar extends Component {
               handleClear={this.handleClear}
               handleEnter={this.handleSubmit}
             />
-            <CartCount itemCount={items.length} />
+            <CartCount
+              itemCount={
+                items.length
+                  ? getItemsCount(items)
+                  : 0
+              }
+            />
           </Flex>
         </Flex>
       </Wrapper>
