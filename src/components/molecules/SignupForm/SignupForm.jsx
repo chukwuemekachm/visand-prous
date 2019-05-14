@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import SubHeader from '../../atoms/SubHeader/SubHeader';
 import Input from '../../atoms/Input/Input';
 import Button, { ButtonType } from '../../atoms/Button/Button';
+import FaceBookLogin from '../../organisms/FaceBookLogin/FaceBookLogin';
 import Text from '../../atoms/Text/Text';
 import Flex from '../../_layouts/Flex';
 import { color } from '../../_settings/_variables';
@@ -48,8 +49,8 @@ const Wrapper = styled.div`
 function SignupForm(props) {
   const {
     values: {
-      email, password, name, address1,
-      city, region, confirmPassword, postalCode,
+      email, password, name, address1, country, city,
+      region, confirmPassword, postalCode, mobPhone,
     },
     handleChange, handleSubmit,
   } = props;
@@ -77,6 +78,14 @@ function SignupForm(props) {
         </Flex>
         <Flex justifyContent="space-between">
           <Input
+            placeHolder="Mobile Phone"
+            name="mobPhone"
+            value={mobPhone}
+            handleChange={handleChange}
+            required
+            type="text"
+          />
+          <Input
             placeHolder="Address"
             name="address1"
             value={address1}
@@ -84,10 +93,20 @@ function SignupForm(props) {
             required
             type="text"
           />
+        </Flex>
+        <Flex justifyContent="space-between">
           <Input
             placeHolder="City"
             name="city"
             value={city}
+            handleChange={handleChange}
+            required
+            type="text"
+          />
+          <Input
+            placeHolder="Postal Code"
+            name="postalCode"
+            value={postalCode}
             handleChange={handleChange}
             required
             type="text"
@@ -103,9 +122,9 @@ function SignupForm(props) {
             type="text"
           />
           <Input
-            placeHolder="Postal Code"
-            name="postalCode"
-            value={postalCode}
+            placeHolder="Country"
+            name="country"
+            value={country}
             handleChange={handleChange}
             required
             type="text"
@@ -137,6 +156,7 @@ function SignupForm(props) {
           {'Already have an account? '}
           <Link to="/login">Login</Link>
         </Text>
+        <FaceBookLogin />
       </Flex>
     </Wrapper>
   );
@@ -152,6 +172,8 @@ SignupForm.propTypes = {
     city: PropTypes.string.isRequired,
     region: PropTypes.string.isRequired,
     postalCode: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+    mobPhone: PropTypes.string.isRequired,
   }).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,

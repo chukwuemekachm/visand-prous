@@ -7,6 +7,7 @@ import SubHeader from '../../atoms/SubHeader/SubHeader';
 import Input from '../../atoms/Input/Input';
 import Button, { ButtonType } from '../../atoms/Button/Button';
 import Text from '../../atoms/Text/Text';
+import FaceBookLogin from '../../organisms/FaceBookLogin/FaceBookLogin';
 import Flex from '../../_layouts/Flex';
 import { color } from '../../_settings/_variables';
 
@@ -69,6 +70,7 @@ function LoginForm(props) {
           {"Don't have an account? "}
           <Link to="/signup">Signup</Link>
         </Text>
+        <FaceBookLogin />
       </Flex>
     </Wrapper>
   );

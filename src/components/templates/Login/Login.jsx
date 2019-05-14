@@ -16,6 +16,7 @@ class Login extends Component {
   state = {
     email: '',
     password: '',
+    url: process.env.API_URL,
   };
 
   handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });
@@ -25,6 +26,7 @@ class Login extends Component {
       const { authenticateUser } = this.props;
       const { email, password } = this.state;
       await authenticateUser({ email, password });
+      toastr.success('Your login was successful');
     } catch (err) {
       toastr.error('An error occurred, please try again later.');
     }

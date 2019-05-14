@@ -20,19 +20,21 @@ const Wrapper = styled(Title)`
   display: inline-block;
 `;
 
-const NavLink = ({ children, url }) => (
+const NavLink = ({ children, url, handleClick }) => (
   <Wrapper>
-    <Link to={url}>{ children }</Link>
+    <Link to={url} onClick={handleClick}>{ children }</Link>
   </Wrapper>
 );
 
 NavLink.propTypes = {
   children: PropTypes.node.isRequired,
   url: PropTypes.string,
+  handleClick: PropTypes.func,
 };
 
 NavLink.defaultProps = {
   url: '/',
+  handleClick: () => true,
 };
 
 export default NavLink;

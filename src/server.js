@@ -2,7 +2,7 @@ const expess = require('express');
 const path = require('path');
 
 const app = expess();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 app.use(expess.static('dist'));
 

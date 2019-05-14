@@ -20,11 +20,11 @@ function App() {
         <div>
           <NavBar />
           <Switch>
-            <Route path="/" exact render={props => <Catalog {...props} />} />
+            {/* <Route path="/" exact render={props => <Catalog {...props} />} /> */}
             <Route path="/login" exact render={props => <Login {...props} />} />
             <Route path="/signup" exact render={props => <Signup {...props} />} />
-            <Route path="/:productId" render={props => <Product {...props} />} />
-            <Redirect to="/" />
+            {/* <Route path="/:productId" render={props => <Product {...props} />} /> */}
+            {/* <Redirect to="/" /> */}
           </Switch>
           <Footer />
           <GlobalStyles />

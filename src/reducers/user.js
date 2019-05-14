@@ -1,5 +1,6 @@
 import {
   SET_USER,
+  LOGOUT_USER,
 } from '../constants';
 
 const initialState = {
@@ -12,6 +13,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         profile: action.user,
+      };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        profile: {},
       };
     default:
       return state;

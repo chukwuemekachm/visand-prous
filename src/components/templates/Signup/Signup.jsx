@@ -22,6 +22,8 @@ class Signup extends Component {
     city: '',
     region: '',
     postalCode: '',
+    country: '',
+    mobPhone: '',
   };
 
   handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });
@@ -29,9 +31,10 @@ class Signup extends Component {
   handleSubmit = async () => {
     try {
       const { authenticateUser } = this.props;
-      const { email, password } = this.state;
-      await authenticateUser({ email, password });
+      await authenticateUser(this.state);
+      toastr.success('Your signup was successful');
     } catch (err) {
+      console.log(err);
       toastr.error('An error occurred, please try again later.');
     }
   };

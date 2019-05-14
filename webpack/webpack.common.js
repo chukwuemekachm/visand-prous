@@ -1,9 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const dotenv = require('dotenv');
 
 const DIST_DIR = path.join(__dirname, '../dist');
 const SRC_DIR =  './src';
+const env = dotenv.config().parsed;
+const envKeys = Object.keys(env).reduce((accumulator, current) => {
+  accumulator[`process.env.${current}`] = JSON.stringify(env[current]);
+  return accumulator;
+}, {});
 
 module.exports = {
   entry: ['@babel/polyfill', `${SRC_DIR}/index.js`],
@@ -28,6 +34,7 @@ module.exports = {
       template: `${SRC_DIR}/index.html`,
       inject: 'body',
     }),
+    new webpack.DefinePlugin(envKeys),
   ],
   module: {
     rules: [

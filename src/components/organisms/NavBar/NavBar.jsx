@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import SubHeader from '../../atoms/SubHeader/SubHeader';
 import NavLink from '../../molecules/NavLink/NavLink';
+import Title from '../../atoms/Title/Title';
 import Search from '../../molecules/Search/Search';
 import CartCount from '../../molecules/CartCount/CartCount';
 import Flex from '../../_layouts/Flex';
@@ -12,6 +14,7 @@ import { color, screenSizes } from '../../_settings/_variables';
 
 import { getCatalog } from '../../../actions/catalog';
 import { getCartDetails } from '../../../actions/cart';
+import { logoutUser } from '../../../actions/user';
 import { getItemsCount } from '../../../utils';
 
 const Wrapper = styled.nav`
@@ -23,12 +26,16 @@ const Wrapper = styled.nav`
   position: sticky;
   top: 0em;
 
-  h2 {
+  a, h2 {
     display: inline-block;
     margin: 0em;
     color: ${color.CRIMSON};
     letter-spacing: .1em;
     align-self: center;
+  }
+
+  h3 {
+    color: ${color.LAVENDER};
   }
 
   @media (max-width: ${screenSizes.MOBILE}) {
@@ -55,6 +62,15 @@ export class NavBar extends Component {
 
   handleChange = ({ target: { value } }) => this.setState({ search: value });
 
+  handleUserLogout = async () => {
+    try {
+      const { logoutUser } = this.props;
+      await logoutUser();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   handleClear = () => this.setState({ search: '' });
 
   handleSubmit = async ({ target: { value } }) => {
@@ -70,24 +86,19 @@ export class NavBar extends Component {
   }
 
   render() {
-    const { items } = this.props;
+    const { items, profile: { name } } = this.props;
     const { search } = this.state;
     return (
       <Wrapper>
         <Flex justifyContent="space-between" alignItems="baseline">
-          <SubHeader>VISAND-PROUS</SubHeader>
+          <Link to="/">
+            <SubHeader>VISAND-PROUS</SubHeader>
+          </Link>
           <Flex
             display="inline-flex"
             justifyContent="space-between"
             alignItems="baseline"
           >
-            <Flex display="inline-flex">
-              <NavLink url="/">Women</NavLink>
-              <NavLink url="/">Men</NavLink>
-              <NavLink url="/">Kids</NavLink>
-              <NavLink url="/">Shoes</NavLink>
-              <NavLink url="/">Brands</NavLink>
-            </Flex>
             <Search
               value={search}
               handleChange={this.handleChange}
@@ -101,6 +112,13 @@ export class NavBar extends Component {
                   : 0
               }
             />
+            <Flex display="inline-flex">
+              {
+                name
+                  ? <Title>{name}</Title>
+                  : <NavLink url="/login">Login</NavLink>
+              }
+            </Flex>
           </Flex>
         </Flex>
       </Wrapper>
@@ -110,11 +128,13 @@ export class NavBar extends Component {
 
 export const mapStateToProps = state => ({
   items: state.cart.items,
+  profile: state.user.profile,
 });
 
 export const mapDispatchToProps = dispatch => ({
   getCatalog: search => dispatch(getCatalog(search)),
   getCartDetails: () => dispatch(getCartDetails()),
+  logoutUser: () => dispatch(logoutUser()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

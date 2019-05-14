@@ -12,6 +12,7 @@ export const color = {
   DARK_SLATE_GREY: '#2E2E2E',
   DIM_GREY: '#595959',
   DARK_GREY: '#969696',
+  STEEL_BLUE: '#4267B2',
 };
 
 export const fontFamily = {
