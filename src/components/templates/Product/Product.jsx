@@ -10,9 +10,11 @@ import ItemAttributes from '../../molecules/ItemAttributes/ItemAttributes';
 import Quantity from '../../molecules/Quantity/Quantity';
 import Button, { ButtonType, ButtonSize } from '../../atoms/Button/Button';
 import Flex from '../../_layouts/Flex';
+import { color } from '../../_settings/_variables';
 
 import { getProductDetails } from '../../../actions/catalog';
 import { addItemToCart } from '../../../actions/cart';
+import toastr from '../../../helpers/toastr';
 
 const Wrapper = styled.div`
   width: 70%;
@@ -40,7 +42,7 @@ Wrapper.Gallery.Aside = styled.div`
     margin: auto;
     margin-bottom: 1em;
     padding: .5em;
-    border: .05em solid crimson;
+    border: .05em solid ${color.CRIMSON};
     box-sizing: border-box;
     cursor: pointer;
   }
@@ -91,11 +93,13 @@ class Product extends Component {
     try {
       const { selectedAttributes: attributes } = this.state;
       let { quantity } = this.state;
+      const message = `Successfully added ${quantity} item(s) to cart`;
       const { addItemToCart } = this.props;
       while (quantity > 0) {
         await addItemToCart({ productId, attributes });
         quantity--;
       }
+      toastr.success(message);
     } catch (err) {
       console.log(err);
     }

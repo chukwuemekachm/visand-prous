@@ -3,8 +3,14 @@ import {
   LOGOUT_USER,
 } from '../constants';
 
+const localUserProfile = window.localStorage.getItem('vs-user-profile');
+
+const USER_PROFILE = !localUserProfile || localUserProfile === 'undefined'
+  ? {}
+  : localUserProfile;
+
 const initialState = {
-  profile: {},
+  profile: USER_PROFILE,
 };
 
 export default (state = initialState, action) => {

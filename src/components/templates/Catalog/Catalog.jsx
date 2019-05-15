@@ -15,6 +15,7 @@ import {
   getCategoryProducts,
 } from '../../../actions/catalog';
 import { addItemToCart } from '../../../actions/cart';
+import toastr from '../../../helpers/toastr';
 
 const Wrapper = styled.div`
   width: 95%;
@@ -70,6 +71,7 @@ export class Catalog extends Component {
     try {
       const { addItemToCart } = this.props;
       await addItemToCart({ productId });
+      toastr.success('Successfully added item to cart');
     } catch (err) {
       console.log(err);
     }
@@ -81,7 +83,7 @@ export class Catalog extends Component {
     return (
       <Wrapper>
         <Banner />
-        <Flex justifyContent="space-evenly">
+        <Flex justifyContent="space-between">
           <SideNav
             departments={departments}
             categories={categories}

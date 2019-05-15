@@ -1,4 +1,4 @@
-const itemName = 'visand-prous-shop';
+const itemName = 'vs-shop';
 
 export const saveState = (state) => {
   const serialisedState = JSON.stringify(state);
