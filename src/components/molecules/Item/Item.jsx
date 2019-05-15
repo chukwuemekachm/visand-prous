@@ -17,7 +17,7 @@ const Wrapper = styled.figure.attrs({
   width: 18%;
   display: inline-flex;
   flex-direction: column;
-  box-shadow: 0px 1px 2px 0px rgba(9, 30, 66, 0.25);
+  box-shadow: 0 0.0625em 0.125em 0 rgba(9, 30, 66, 0.25);
   padding: .8em .8em 2em .8em;
   text-align: center;
   align-items: center;
@@ -43,6 +43,10 @@ const Wrapper = styled.figure.attrs({
 
   button {
     font-size: .8em;
+  }
+
+  :hover {
+    box-shadow: 0 0.0625em 1.25em 0.125em rgba(0, 0, 0, 0.1);
   }
 
   @media (max-width: ${screenSizes.TABLET}) {

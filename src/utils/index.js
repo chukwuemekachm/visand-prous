@@ -22,4 +22,10 @@ export const getItemsCount = (items) => {
   return Number.isNaN(itemsCount) ? 0 : itemsCount;
 };
 
+export const getItemsSubTotal = (items) => {
+  const itemsSubtotal = items
+    .reduce((accumulator, { subtotal }) => accumulator + Number.parseFloat(subtotal), 0);
+  return Number.isNaN(itemsSubtotal) ? 0 : itemsSubtotal;
+};
+
 export default generateCartId;

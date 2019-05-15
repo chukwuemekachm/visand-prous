@@ -5,7 +5,7 @@ import {
 } from '../constants';
 import { generateCartId } from '../utils';
 
-const localCartId = window.localStorage.getItem('visand-prous-card-id');
+const localCartId = window.localStorage.getItem('vs-cart-id');
 
 const CART_ID = !localCartId || localCartId === 'undefined'
   ? generateCartId()

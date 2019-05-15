@@ -28,7 +28,7 @@ export const getCartDetails = () => async (dispatch, getState) => {
   try {
     const { cart: { cartId } } = getState();
     const { data: { cart: { items, cartId: myCartId } } } = await api.get(`/shopping-cart/${cartId}`);
-    window.localStorage.setItem('visand-prous-card-id', myCartId);
+    window.localStorage.setItem('vs-cart-id', myCartId);
     return dispatch(setCartDetails(items, myCartId));
   } catch (error) {
     throw error;

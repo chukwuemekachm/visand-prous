@@ -24,6 +24,7 @@ export const authenticateUser = (user, action = 'login') => async (dispatch) => 
   try {
     const { data: { user: profile, token } } = await api.post(`/auth/${action}`, { ...user });
     window.localStorage.setItem('vs-jwt-token', token);
+    window.localStorage.setItem('vs-user-profile', profile);
     return dispatch(setUser(profile));
   } catch (error) {
     throw error;
@@ -34,6 +35,7 @@ export const authenticateFacebookUser = accessToken => async (dispatch) => {
   try {
     const { data: { user: profile, token } } = await api.get(`/auth/facebook?access_token=${accessToken}`);
     window.localStorage.setItem('vs-jwt-token', token);
+    window.localStorage.setItem('vs-user-profile', profile);
     return dispatch(setUser(profile));
   } catch (error) {
     throw error;

@@ -23,10 +23,17 @@ Wrapper.Display = styled.span`
   border-radius: 2em;
 `;
 
-function Quantity({ handleIncrement, handleDecrement, quantity }) {
+function Quantity(props) {
+  const {
+    handleIncrement, handleDecrement, quantity, showQuantity,
+  } = props;
   return (
     <Wrapper>
-      <Title color={color.DARK_GREY}>Quantity</Title>
+      {
+        showQuantity
+          ? <Title color={color.DARK_GREY}>Quantity</Title>
+          : ''
+      }
       <Flex alignItems="baseline">
         <Icon backGround handleClick={() => handleDecrement()}>
           <TiMinus />
@@ -44,6 +51,11 @@ Quantity.propTypes = {
   handleIncrement: PropTypes.func.isRequired,
   handleDecrement: PropTypes.func.isRequired,
   quantity: PropTypes.number.isRequired,
+  showQuantity: PropTypes.bool,
+};
+
+Quantity.defaultProps = {
+  showQuantity: true,
 };
 
 export default Quantity;
