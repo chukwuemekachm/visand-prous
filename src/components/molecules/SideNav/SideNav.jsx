@@ -12,6 +12,7 @@ const Wrapper = styled.section`
   padding: .5em 2em 2em;
   width: 23%;
   box-sizing: border-box;
+  display: inline-block;
 
   button {
     margin-top: .3em;

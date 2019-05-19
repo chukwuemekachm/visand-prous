@@ -18,7 +18,7 @@ const Wrapper = styled.figure.attrs({
   display: inline-flex;
   flex-direction: column;
   box-shadow: 0 0.0625em 0.125em 0 rgba(9, 30, 66, 0.25);
-  padding: .8em .8em 2em .8em;
+  padding: 0em 0em 2em 0em;
   text-align: center;
   align-items: center;
   box-sizing: border-box;
@@ -34,7 +34,7 @@ const Wrapper = styled.figure.attrs({
   }
 
   h3 {
-    margin-top: 1.8em;
+    margin-top: .7em;
   }
 
   p {
