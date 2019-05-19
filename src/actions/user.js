@@ -11,8 +11,8 @@ export const logoutUser = () => async (dispatch) => {
     return dispatch({
       type: LOGOUT_USER,
     });
-  } catch (error) {
-    throw error;
+  } catch ({ response }) {
+    throw response;
   }
 };
 
@@ -26,8 +26,8 @@ export const authenticateUser = (user, action = 'login') => async (dispatch) => 
     window.localStorage.setItem('vs-jwt-token', token);
     window.localStorage.setItem('vs-user-profile', profile);
     return dispatch(setUser(profile));
-  } catch (error) {
-    throw error;
+  } catch ({ response }) {
+    throw response;
   }
 };
 
@@ -37,8 +37,8 @@ export const authenticateFacebookUser = accessToken => async (dispatch) => {
     window.localStorage.setItem('vs-jwt-token', token);
     window.localStorage.setItem('vs-user-profile', profile);
     return dispatch(setUser(profile));
-  } catch (error) {
-    throw error;
+  } catch ({ response }) {
+    throw response;
   }
 };
 

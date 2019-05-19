@@ -20,13 +20,6 @@ module.exports = {
   resolve: {
     extensions: ['.jsx', '.js'],
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-    alias: {
-      _components: path.resolve(__dirname, 'src/components/'),
-      _atoms: path.resolve(__dirname, 'src/components/atoms/'),
-      _molecules: path.resolve(__dirname, 'src/components/molecules/'),
-      _organisms: path.resolve(__dirname, 'src/components/organisms/'),
-      _templates: path.resolve(__dirname, 'src/components/templates/'),
-    },
   },
   plugins: [
     new webpack.ProgressPlugin(),

@@ -13,6 +13,7 @@ export const color = {
   DIM_GREY: '#595959',
   DARK_GREY: '#969696',
   STEEL_BLUE: '#4267B2',
+  MID_NIGHT_BLUE: '#321977',
 };
 
 export const fontFamily = {

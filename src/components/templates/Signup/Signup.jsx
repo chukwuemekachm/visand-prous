@@ -18,12 +18,7 @@ class Signup extends Component {
     email: '',
     password: '',
     confirmPassword: '',
-    address1: '',
-    city: '',
-    region: '',
-    postalCode: '',
-    country: '',
-    mobPhone: '',
+    errors: {},
   };
 
   handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });
@@ -33,9 +28,9 @@ class Signup extends Component {
       const { authenticateUser } = this.props;
       await authenticateUser(this.state);
       toastr.success('Your signup was successful');
-    } catch (err) {
-      console.log(err);
-      toastr.error('An error occurred, please try again later.');
+    } catch ({ data: { message, errors = {} } }) {
+      this.setState({ errors });
+      toastr.error(message);
     }
   };
 
@@ -46,6 +41,7 @@ class Signup extends Component {
           values={this.state}
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
+          errors={this.state.errors}
         />
       </Wrapper>
     );

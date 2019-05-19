@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { fontFamily, fontWeight } from '../../_settings/_variables';
+
 const Wrapper = styled.span`
   width: 100%;
 `;
@@ -12,8 +14,8 @@ Wrapper.Input = styled.input`
   padding: .5em;
   border: none;
   outline: none;
-  font-family: sans-serif;
-  font-weight: 600;
+  font-family: ${fontFamily.OPEN_SANS};
+  font-weight: ${fontWeight.BASE};
   letter-spacing: .1em;
   background-color: transparent;
 `;

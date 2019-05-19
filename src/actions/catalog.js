@@ -16,8 +16,8 @@ export const getCatalog = (search = '') => async (dispatch) => {
   try {
     const { data: { products } } = await api.get(`/product?search=${search}`);
     return dispatch(setCatalog(products));
-  } catch (error) {
-    throw error;
+  } catch ({ response }) {
+    throw response;
   }
 };
 
@@ -29,8 +29,8 @@ export const getDepartments = () => async (dispatch) => {
   try {
     const { data: { departments } } = await api.get('/department');
     return dispatch(setDepartments(departments));
-  } catch (error) {
-    throw error;
+  } catch ({ response }) {
+    throw response;
   }
 };
 
@@ -42,8 +42,8 @@ export const getDepartmentCategories = departmentId => async (dispatch) => {
   try {
     const { data: { categories } } = await api.get(`/department/${departmentId}/categories`);
     return dispatch(setDepartmentCategories(categories));
-  } catch (error) {
-    throw error;
+  } catch ({ response }) {
+    throw response;
   }
 };
 
@@ -55,8 +55,8 @@ export const getCategoryProducts = categoryId => async (dispatch) => {
   try {
     const { data: { products } } = await api.get(`/category/${categoryId}/products`);
     return dispatch(setCategoryProducts(products));
-  } catch (error) {
-    throw error;
+  } catch ({ response }) {
+    throw response;
   }
 };
 
@@ -68,7 +68,7 @@ export const getProductDetails = productId => async (dispatch) => {
   try {
     const { data: { product } } = await api.get(`/product/${productId}`);
     return dispatch(setProductDetails(product));
-  } catch (error) {
-    throw error;
+  } catch ({ response }) {
+    throw response;
   }
 };
