@@ -16,6 +16,7 @@ import {
 } from '../../../actions/catalog';
 import { addItemToCart } from '../../../actions/cart';
 import toastr from '../../../helpers/toastr';
+import Pagination from '../../organisms/Pagination/Pagination';
 
 const Wrapper = styled.div`
   width: 95%;
@@ -82,16 +83,18 @@ export class Catalog extends Component {
     const { selectedDepartmentId, selectedCategoryId } = this.state;
     return (
       <Wrapper>
-        <Banner />
         <Flex justifyContent="space-between">
           <SideNav
-            departments={departments}
-            categories={categories}
-            selectedDepartmentId={selectedDepartmentId}
-            selectedCategoryId={selectedCategoryId}
-            handleCategoryClick={this.handleCategoryClick}
-            handleDepartmentClick={this.handleDepartmentClick}
-          />
+              departments={departments}
+              categories={categories}
+              selectedDepartmentId={selectedDepartmentId}
+              selectedCategoryId={selectedCategoryId}
+              handleCategoryClick={this.handleCategoryClick}
+              handleDepartmentClick={this.handleDepartmentClick}
+            />
+            <Banner />
+        </Flex>
+        <Flex justifyContent="space-between">
           {
             products.map((product) => (
               <Item
@@ -102,16 +105,23 @@ export class Catalog extends Component {
             ))
           }
         </Flex>
+        <Pagination />
       </Wrapper>
     );
   }
 }
 
-export const mapStateToProps = state => ({
-  departments: state.catalog.departments,
-  categories: state.catalog.categories,
-  products: state.catalog.filteredProducts,
-});
+export const mapStateToProps = state => {
+  const products =  state.catalog.paginatedProducts.length
+    ? state.catalog.paginatedProducts
+    : state.catalog.filteredProducts;
+    
+  return {
+    departments: state.catalog.departments,
+    categories: state.catalog.categories,
+    products,
+  }
+};
 
 export const mapDispatchToProps = dispatch => ({
   getCatalog: () => dispatch(getCatalog()),

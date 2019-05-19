@@ -12,12 +12,13 @@ export const IconSize = {
 const extraCss = css`
   padding: .16em .27em .25em .27em;
   border-radius: 3em;
-  background-color: ${colors.LAVENDER};
+  background-color: ${({ active }) => (active ? colors.DIM_GREY : colors.LAVENDER)};
+  color: ${({ active }) => (active ? colors.WHITE : colors.BLACK)};
   
   :hover {
     cursor: pointer;
-    background-color: ${colors.DIM_GREY};
-    color: ${colors.WHITE};
+    background-color: ${({ active }) => (active ? colors.LAVENDER : colors.DIM_GREY)};
+    color: ${({ active }) => (active ? colors.BLACK : colors.WHITE)};
   }
 `;
 
@@ -29,7 +30,7 @@ const Wrapper = styled.span`
 
 function Icon(props) {
   const {
-    children, size, color, backGround, handleClick,
+    children, size, color, backGround, handleClick, active,
   } = props;
   return (
     <Wrapper
@@ -37,6 +38,7 @@ function Icon(props) {
       color={color}
       backGround={backGround}
       onClick={handleClick}
+      active={active}
     >
       { children }
     </Wrapper>
@@ -49,6 +51,7 @@ Icon.propTypes = {
   color: PropTypes.string,
   backGround: PropTypes.bool,
   handleClick: PropTypes.func,
+  active: PropTypes.bool,
 };
 
 Icon.defaultProps = {
@@ -56,6 +59,7 @@ Icon.defaultProps = {
   color: colors.BLACK,
   backGround: false,
   handleClick: () => true,
+  active: false,
 };
 
 export default Icon;

@@ -6,14 +6,15 @@ import SubHeader from '../../atoms/SubHeader/SubHeader';
 import Button, { ButtonSize, ButtonType, ButtonTheme } from '../../atoms/Button/Button';
 import { color, fontWeight } from '../../_settings/_variables';
 
-const imageUrl = 'https://colorlib.com/preview/theme/selling/images/hero_2.jpg';
+const imageUrl = 'https://cdn.pixabay.com/photo/2017/08/10/05/11/shirts-2618461_1280.jpg';
 
 const Wrapper = styled.section`
   background-image: url(${imageUrl});
   background-repeat: no-repeat;
   background-size: center;
-  width: 100%;
+  width: 73%;
   margin: 2em auto;
+  display: inline-block;
 `;
 
 Wrapper.Overlay = styled.div`

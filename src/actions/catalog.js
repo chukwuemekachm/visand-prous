@@ -6,6 +6,7 @@ import {
   SET_CATEGORIES,
   SET_CATEGORY_PRODUCTS,
   SET_PRODUCT_DETAILS,
+  SET_PAGINATED_PRODUCTS,
 } from '../constants';
 
 const setCatalog = products => ({
@@ -72,3 +73,8 @@ export const getProductDetails = productId => async (dispatch) => {
     throw response;
   }
 };
+
+export const setPaginatedProducts = pageNumber => ({
+  type: SET_PAGINATED_PRODUCTS,
+  pageNumber,
+});

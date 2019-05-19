@@ -4,13 +4,16 @@ import {
   SET_CATEGORIES,
   SET_CATEGORY_PRODUCTS,
   SET_PRODUCT_DETAILS,
+  SET_PAGINATED_PRODUCTS,
 } from '../constants';
 
 const initialState = {
   products: [],
   filteredProducts: [],
+  paginatedProducts: [],
   departments: [],
   product: {},
+  pageNumber: 0,
 };
 
 export default (state = initialState, action) => {
@@ -40,6 +43,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         product: action.product,
+      };
+    case SET_PAGINATED_PRODUCTS:
+      return {
+        ...state,
+        paginatedProducts: state.filteredProducts
+          .slice(((action.pageNumber - 1) * 10), (action.pageNumber * 10)),
+        pageNumber: action.pageNumber,
       };
     default:
       return state;
