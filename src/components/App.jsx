@@ -11,6 +11,8 @@ import Product from './templates/Product/Product';
 import Login from './templates/Login/Login';
 import Signup from './templates/Signup/Signup';
 import Checkout from './templates/Checkout/Checkout';
+import DefaultPrivateRoute from './organisms/PrivateRoute/PrivateRoute';
+import DefaultGuestRoute from './organisms/GuestRoute/GuestRoute';
 import Footer from './molecules/Footer/Footer';
 import GlobalStyles from './_settings/_global_styles';
 
@@ -22,9 +24,9 @@ function App() {
           <NavBar />
           <Switch>
             <Route path="/" exact render={props => <Catalog {...props} />} />
-            <Route path="/login" exact render={props => <Login {...props} />} />
-            <Route path="/signup" exact render={props => <Signup {...props} />} />
-            <Route path="/checkout" exact render={props => <Checkout {...props} />} />
+            <DefaultGuestRoute path="/signup" exact component={() => <Signup />} />
+            <DefaultGuestRoute path="/login" exact component={() => <Login />} />
+            <DefaultPrivateRoute path="/checkout" exact component={() => <Checkout />} />
             <Route path="/:productId" render={props => <Product {...props} />} />
             <Redirect to="/" />
           </Switch>

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import SubHeader from '../../atoms/SubHeader/SubHeader';
 import Input from '../../atoms/Input/Input';
+import Error from '../../atoms/Error/Error';
 import Button, { ButtonType } from '../../atoms/Button/Button';
 import FaceBookLogin from '../../organisms/FaceBookLogin/FaceBookLogin';
 import Text from '../../atoms/Text/Text';
@@ -21,23 +22,20 @@ const Wrapper = styled.div`
     display: inline-block;
     color: ${color.CRIMSON};
     letter-spacing: .1em;
+    margin: 0em;
   }
 
   input {
-    margin-bottom: 2em;
+    margin-top: 2em;
     padding: .7em 1em;
     border: .05em solid ${color.CRIMSON};
     border-radius: 3em;
     box-sizing: border-box;
   }
 
-  div[display=flex] > div[display=flex] span {
-    width: 49%;
-  }
-
   button {
     width: 100%;
-    margin: auto;
+    margin-top: 2em;
   }
 
   div[display=flex] {
@@ -45,12 +43,10 @@ const Wrapper = styled.div`
   }
 `;
 
-
 function SignupForm(props) {
   const {
     values: {
-      email, password, name, address1, country, city,
-      region, confirmPassword, postalCode, mobPhone,
+      email, password, name, confirmPassword, errors,
     },
     handleChange, handleSubmit,
   } = props;
@@ -58,78 +54,32 @@ function SignupForm(props) {
     <Wrapper>
       <Flex flexDirection="column">
         <SubHeader>Signup</SubHeader>
-        <Flex justifyContent="space-between">
-          <Input
-            placeHolder="Name"
-            name="name"
-            value={name}
-            handleChange={handleChange}
-            required
-            type="text"
-          />
-          <Input
-            placeHolder="Email"
-            name="email"
-            value={email}
-            handleChange={handleChange}
-            required
-            type="text"
-          />
-        </Flex>
-        <Flex justifyContent="space-between">
-          <Input
-            placeHolder="Mobile Phone"
-            name="mobPhone"
-            value={mobPhone}
-            handleChange={handleChange}
-            required
-            type="text"
-          />
-          <Input
-            placeHolder="Address"
-            name="address1"
-            value={address1}
-            handleChange={handleChange}
-            required
-            type="text"
-          />
-        </Flex>
-        <Flex justifyContent="space-between">
-          <Input
-            placeHolder="City"
-            name="city"
-            value={city}
-            handleChange={handleChange}
-            required
-            type="text"
-          />
-          <Input
-            placeHolder="Postal Code"
-            name="postalCode"
-            value={postalCode}
-            handleChange={handleChange}
-            required
-            type="text"
-          />
-        </Flex>
-        <Flex justifyContent="space-between">
-          <Input
-            placeHolder="Region"
-            name="region"
-            value={region}
-            handleChange={handleChange}
-            required
-            type="text"
-          />
-          <Input
-            placeHolder="Country"
-            name="country"
-            value={country}
-            handleChange={handleChange}
-            required
-            type="text"
-          />
-        </Flex>
+        <Input
+          placeHolder="Name"
+          name="name"
+          value={name}
+          handleChange={handleChange}
+          required
+          type="text"
+        />
+        {
+          errors.name && errors.name.length
+            ? errors.name.map(error => (<Error key={error}>{error}</Error>))
+            : ''
+        }
+        <Input
+          placeHolder="Email"
+          name="email"
+          value={email}
+          handleChange={handleChange}
+          required
+          type="text"
+        />
+        {
+          errors.email && errors.email.length
+            ? errors.email.map(error => (<Error key={error}>{error}</Error>))
+            : ''
+        }
         <Input
           placeHolder="Password"
           name="password"
@@ -138,6 +88,11 @@ function SignupForm(props) {
           required
           type="password"
         />
+        {
+          errors.password && errors.password.length
+            ? errors.password.map(error => (<Error key={error}>{error}</Error>))
+            : ''
+        }
         <Input
           placeHolder="Confirm Password"
           name="confirmPassword"
@@ -146,6 +101,11 @@ function SignupForm(props) {
           required
           type="password"
         />
+        {
+          errors.confirmPassword && errors.confirmPassword.length
+            ? errors.confirmPassword.map(error => (<Error key={error}>{error}</Error>))
+            : ''
+        }
         <Button
           type={ButtonType.ROUNDED}
           handleClick={handleSubmit}
@@ -168,13 +128,8 @@ SignupForm.propTypes = {
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     confirmPassword: PropTypes.string.isRequired,
-    address1: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    region: PropTypes.string.isRequired,
-    postalCode: PropTypes.string.isRequired,
-    country: PropTypes.string.isRequired,
-    mobPhone: PropTypes.string.isRequired,
   }).isRequired,
+  errors: PropTypes.shape({}).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
 };

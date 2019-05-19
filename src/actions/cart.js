@@ -30,8 +30,8 @@ export const getCartDetails = () => async (dispatch, getState) => {
     const { data: { cart: { items, cartId: myCartId } } } = await api.get(`/shopping-cart/${cartId}`);
     window.localStorage.setItem('vs-cart-id', myCartId);
     return dispatch(setCartDetails(items, myCartId));
-  } catch (error) {
-    throw error;
+  } catch ({ response }) {
+    throw response;
   }
 };
 
@@ -49,8 +49,8 @@ export const addItemToCart = ({
       .post(`/shopping-cart/${cartId}/items`, { productId, attributes });
     dispatch(setNewCartItem(item, myCartId));
     return dispatch(getCartDetails(myCartId));
-  } catch (error) {
-    throw error;
+  } catch ({ response }) {
+    throw response;
   }
 };
 
@@ -64,7 +64,7 @@ export const removeItemFromCart = itemId => async (dispatch, getState) => {
     await api.delete(`/shopping-cart/${cartId}/items/${itemId}`);
     dispatch(removeCartItem(itemId));
     return dispatch(getCartDetails(cartId));
-  } catch (error) {
-    throw error;
+  } catch ({ response }) {
+    throw response;
   }
 };

@@ -25,7 +25,7 @@ export const getItemsCount = (items) => {
 export const getItemsSubTotal = (items) => {
   const itemsSubtotal = items
     .reduce((accumulator, { subtotal }) => accumulator + Number.parseFloat(subtotal), 0);
-  return Number.isNaN(itemsSubtotal) ? 0 : itemsSubtotal;
+  return Number.isNaN(itemsSubtotal) ? 0 : itemsSubtotal.toFixed(2);
 };
 
 export default generateCartId;

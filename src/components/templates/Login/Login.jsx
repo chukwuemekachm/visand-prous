@@ -16,7 +16,7 @@ class Login extends Component {
   state = {
     email: '',
     password: '',
-    url: process.env.API_URL,
+    errors: {},
   };
 
   handleChange = ({ target: { value, name } }) => this.setState({ [name]: value });
@@ -27,8 +27,9 @@ class Login extends Component {
       const { email, password } = this.state;
       await authenticateUser({ email, password });
       toastr.success('Your login was successful');
-    } catch (err) {
-      toastr.error('An error occurred, please try again later.');
+    } catch ({ data: { message, errors = {} } }) {
+      this.setState({ errors });
+      toastr.error(message);
     }
   };
 
@@ -39,18 +40,15 @@ class Login extends Component {
           values={this.state}
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
+          errors={this.state.errors}
         />
       </Wrapper>
     );
   }
 }
 
-export const mapStateToProps = state => ({
-  ...state
-});
-
 export const mapDispatchToProps = dispatch => ({
   authenticateUser: user => dispatch(authenticateUser(user, 'login')),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

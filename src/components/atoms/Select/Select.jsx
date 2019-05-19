@@ -1,26 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { FaSort } from 'react-icons/lib/fa';
 
 import Icon from '../Icon/Icon';
 import { color, fontFamily, fontWeight } from '../../_settings/_variables';
 
 
 const Wrapper = styled.span`
+  width: 100%;
   padding: .31em .1em .21em 1em;
   border: .1em solid ${color.LAVENDER};
   border-radius: 2em;
+  box-sizing: border-box;
 
-  i.icon {
+  svg {
     position: relative;
-    right: 1em;
-    top: .1em;
+    right: .1em;
   }
 `;
 
 Wrapper.Select = styled.select`
   font-size: 1em;
-  width: 4em;
+  width: 92%;
   border: none;
   background-color: transparent;
   color: ${color.DIM_GREY};
@@ -35,20 +37,35 @@ Wrapper.Select = styled.select`
 
 Wrapper.Option = styled.option``;
 
-const Select = ({ options }) => (
+const Select = ({ options, handleChange }) => (
   <Wrapper>
-    <Wrapper.Select>
+    <Wrapper.Select onChange={handleChange}>
       {
         options
-          .map(option => (<Wrapper.Option key={option} value={option}>{option}</Wrapper.Option>))
+          .map(({ value, display }) => (
+            <Wrapper.Option
+              key={value}
+              value={value}
+            >
+              {display}
+            </Wrapper.Option>
+          ))
       }
     </Wrapper.Select>
-    <Icon iconName="arrow-down" />
+    <Icon>
+      <FaSort />
+    </Icon>
   </Wrapper>
 );
 
 Select.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      display: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default Select;

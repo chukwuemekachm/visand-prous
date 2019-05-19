@@ -11,6 +11,7 @@ const USER_PROFILE = !localUserProfile || localUserProfile === 'undefined'
 
 const initialState = {
   profile: USER_PROFILE,
+  isAuthenticated: false,
 };
 
 export default (state = initialState, action) => {
@@ -19,11 +20,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         profile: action.user,
+        isAuthenticated: true,
       };
     case LOGOUT_USER:
       return {
         ...state,
         profile: {},
+        isAuthenticated: false,
       };
     default:
       return state;

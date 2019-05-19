@@ -16,6 +16,7 @@ import { getCatalog } from '../../../actions/catalog';
 import { getCartDetails } from '../../../actions/cart';
 import { logoutUser } from '../../../actions/user';
 import { getItemsCount } from '../../../utils';
+import toastr from '../../../helpers/toastr';
 
 const Wrapper = styled.div`
   top: 0em;
@@ -77,7 +78,13 @@ export class NavBar extends Component {
 
   handleClear = () => this.setState({ search: '' });
 
-  handleCartToggle = () => this.setState(({ displayCart }) => ({ displayCart: !displayCart }));
+  handleCartToggle = () => {
+    const { items } = this.props;
+    if (!items.length) {
+      return toastr.info('You currently have no items in your cart');
+    }
+    return this.setState(({ displayCart }) => ({ displayCart: !displayCart }));
+  };
 
   handleSubmit = async ({ target: { value } }) => {
     try {

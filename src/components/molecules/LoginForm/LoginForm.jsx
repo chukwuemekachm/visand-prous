@@ -7,6 +7,7 @@ import SubHeader from '../../atoms/SubHeader/SubHeader';
 import Input from '../../atoms/Input/Input';
 import Button, { ButtonType } from '../../atoms/Button/Button';
 import Text from '../../atoms/Text/Text';
+import Error from '../../atoms/Error/Error';
 import FaceBookLogin from '../../organisms/FaceBookLogin/FaceBookLogin';
 import Flex from '../../_layouts/Flex';
 import { color } from '../../_settings/_variables';
@@ -21,10 +22,11 @@ const Wrapper = styled.div`
     display: inline-block;
     color: ${color.CRIMSON};
     letter-spacing: .1em;
+    margin: 0em;
   }
 
   input {
-    margin-bottom: 2em;
+    margin-top: 2em;
     padding: .7em 1em;
     border: .05em solid ${color.CRIMSON};
     border-radius: 3em;
@@ -33,13 +35,15 @@ const Wrapper = styled.div`
 
   button {
     width: 100%;
-    margin: auto;
+    margin-top: 2em;
   }
 `;
 
 
 function LoginForm(props) {
-  const { values: { email, password }, handleChange, handleSubmit } = props;
+  const {
+    values: { email, password }, handleChange, handleSubmit, errors,
+  } = props;
   return (
     <Wrapper>
       <Flex flexDirection="column">
@@ -50,8 +54,13 @@ function LoginForm(props) {
           value={email}
           handleChange={handleChange}
           required
-          type="email"
+          type="text"
         />
+        {
+          errors.email && errors.email.length
+            ? errors.email.map(error => (<Error key={error}>{error}</Error>))
+            : ''
+        }
         <Input
           placeHolder="Password"
           name="password"
@@ -60,6 +69,11 @@ function LoginForm(props) {
           required
           type="password"
         />
+        {
+          errors.password && errors.password.length
+            ? errors.password.map(error => (<Error key={error}>{error}</Error>))
+            : ''
+        }
         <Button
           type={ButtonType.ROUNDED}
           handleClick={handleSubmit}
@@ -81,6 +95,7 @@ LoginForm.propTypes = {
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
   }).isRequired,
+  errors: PropTypes.shape({}).isRequired,
   handleSubmit: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
