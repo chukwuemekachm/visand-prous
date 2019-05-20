@@ -1,15 +1,17 @@
 import api from './api';
+import store from '../store/configureStore';
 
 import {
   SET_ORDER,
+  REMOVE_ORDER,
 } from '../constants';
 import { getCartDetails } from './cart';
 
 export const getOrderDetails = async (orderId) => {
   try {
     const { data: { order: { totalAmount } } } = await api.get(`/order/${orderId}`);
-    window.vs_order_amount = totalAmount;
-    window.vs_order_id = orderId;
+    window.localStorage.setItem('vs-order-amount', totalAmount);
+    window.localStorage.setItem('vs-order-id', orderId);
     return totalAmount;
   } catch ({ response }) {
     throw response;
@@ -36,8 +38,11 @@ export const createOrder = (shippingId = 2) => async (dispatch, getState) => {
 
 export const verifyOrderPayment = async (paymentId) => {
   try {
-    const orderId = window.vs_order_id;
+    const orderId = window.localStorage.getItem('vs-order-id');
     await api.put(`/order/${orderId}`, { paymentId });
+    window.localStorage.removeItem('vs-order-amount');
+    window.localStorage.removeItem('vs-order-id');
+    return store.dispatch({ type: REMOVE_ORDER });
   } catch ({ response }) {
     throw response;
   }

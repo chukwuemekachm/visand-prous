@@ -30,7 +30,7 @@ class Checkout extends Component {
 
   async componentDidMount() {
     try {
-      const { getShippingRegions, getShippingTypes, makeOrderPayment } = this.props;
+      const { getShippingRegions, getShippingTypes } = this.props;
       await Promise.all([
         getShippingRegions(),
         getShippingTypes(),
@@ -43,7 +43,7 @@ class Checkout extends Component {
               return actions.order.create({
                 purchase_units: [{
                   amount: {
-                    value: window.vs_order_amount || '0.01'
+                    value: window.localStorage.getItem('vs-order-amount') || '0.01'
                   }
                 }]
               });

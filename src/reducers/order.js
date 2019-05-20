@@ -1,6 +1,7 @@
 import {
   SET_ORDER,
   SET_ORDER_PAYMENT,
+  REMOVE_ORDER,
 } from '../constants';
 
 const initialState = {
@@ -14,6 +15,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         orderId: action.orderId,
+      };
+    case REMOVE_ORDER:
+      return {
+        ...state,
+        orderId: 0,
       };
     case SET_ORDER_PAYMENT:
       return {
