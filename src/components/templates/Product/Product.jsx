@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+
 import Image from '../../atoms/Image/Image';
+import Text from '../../atoms/Text/Text';
+import Divider from '../../atoms/Divider/Divider';
 import SubHeader from '../../atoms/SubHeader/SubHeader';
 import Price from '../../atoms/Price/Price';
 import ItemAttributes from '../../molecules/ItemAttributes/ItemAttributes';
 import Quantity from '../../molecules/Quantity/Quantity';
 import Button, { ButtonType, ButtonSize } from '../../atoms/Button/Button';
 import Flex from '../../_layouts/Flex';
+import Item from '../../molecules/Item/Item';
 import { color } from '../../_settings/_variables';
 
 import { getProductDetails } from '../../../actions/catalog';
@@ -19,6 +22,15 @@ import toastr from '../../../helpers/toastr';
 const Wrapper = styled.div`
   width: 70%;
   margin: 3em auto;
+  .price-with-discount,
+  .price-with-discount p {
+    color: grey;
+    line-height: 1.6;
+  }
+  .vs-item {
+    width: 25%;
+    margin: auto;
+  }
 `;
 
 Wrapper.Gallery = styled.section`
@@ -36,7 +48,6 @@ Wrapper.Gallery.Main = styled.figure`
 Wrapper.Gallery.Aside = styled.div`
   width: 15%;
   display: inline-block;
-
   img {
     width: 100%;
     margin: auto;
@@ -52,11 +63,9 @@ Wrapper.Section = styled.section`
   width: 38%;
   margin: auto;
   display: inline-block;
-
   h2 {
     margin-top: 0;
   }
-
   h3 {
     margin-top: 2em;
   }
@@ -82,7 +91,7 @@ class Product extends Component {
 
   async componentDidMount() {
     try {
-      const { match: { params: { productId } }, getProductDetails } = this.props;
+      const { match: { params: { productId } }, getProductDetails, getCatalog } = this.props;
       await getProductDetails(productId);
     } catch (err) {
       console.log(err);
@@ -101,7 +110,7 @@ class Product extends Component {
       }
       toastr.success(message);
     } catch (err) {
-      console.log(err);
+      toastr.success('Failed to add this item to your cart');
     }
   }
 
@@ -132,10 +141,16 @@ class Product extends Component {
   });
 
   render() {
-    const { product: {
-      productId, name, price, image, image2, attributes,
-    } } = this.props;
+    const {
+      product: {
+        productId, name, price, discountedPrice,
+        image, image2, attributes, description,
+      },
+      products,
+    } = this.props;
     const { quantity, src, selectedAttributes } = this.state;
+    const isDiscounted = Number.parseFloat(discountedPrice) > 0;
+
     return (
       <Wrapper>
         {
@@ -161,7 +176,19 @@ class Product extends Component {
                 </Wrapper.Gallery>
                 <Wrapper.Section>
                   <SubHeader>{name}</SubHeader>
-                  <Price>{price}</Price>
+                  {isDiscounted ? (
+                    <Flex>
+                      <Price size="large" className="discounted-price">
+                        {discountedPrice}
+                      </Price>
+                      <s className="price-with-discount">
+                        <Price className="price-with-discount">{price}</Price>
+                      </s>
+                    </Flex>
+                  ) : (
+                    <Price size="large">{price}</Price>
+                  )}
+                  <Text>{description}</Text>
                   <ItemAttributes
                     attributes={attributes}
                     handleAttributeChange={this.handleAttributeChange}
@@ -184,6 +211,24 @@ class Product extends Component {
             )
             : ''
         }
+        <br /> <br />
+        <SubHeader>Featured Items</SubHeader>
+        <Divider />
+        <br /> <br />
+        <Flex justifyContent="space-around">
+          {
+            products.map((product, i) => {
+              if (i < 3) {
+                i++;
+                return (<Item
+                  handleAddItemToCart={this.handleAddToCart}
+                  key={product.productId}
+                  item={product}
+                />);
+              }
+            })
+          }
+        </Flex>
       </Wrapper>
     );
   }
@@ -191,6 +236,7 @@ class Product extends Component {
 
 export const mapStateToProps = state => ({
   product: state.catalog.product,
+  products: state.catalog.filteredProducts,
 });
 
 export const mapDispatchToProps = dispatch => ({

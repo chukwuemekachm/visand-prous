@@ -27,7 +27,6 @@ export default (state = initialState, action) => {
     case REMOVE_ITEM_FROM_CART:
       return {
         ...state,
-        items: [...state.items.filter(item => item.itemId !== action.itemId)],
       };
     case SET_CART_DETAILS:
       return {

@@ -34,6 +34,14 @@ export const getDepartments = () => async (dispatch) => {
     throw response;
   }
 };
+export const getDepartmentProducts = departmentId => async (dispatch) => {
+  try {
+    const { data: { products } } = await api.get(`/department/${departmentId}/products`);
+    return dispatch(setCatalog(products));
+  } catch ({ response }) {
+    throw response;
+  }
+};
 
 const setDepartmentCategories = categories => ({
   type: SET_CATEGORIES,
@@ -42,7 +50,8 @@ const setDepartmentCategories = categories => ({
 export const getDepartmentCategories = departmentId => async (dispatch) => {
   try {
     const { data: { categories } } = await api.get(`/department/${departmentId}/categories`);
-    return dispatch(setDepartmentCategories(categories));
+    dispatch(setDepartmentCategories(categories));
+    return dispatch(getDepartmentProducts(departmentId));
   } catch ({ response }) {
     throw response;
   }

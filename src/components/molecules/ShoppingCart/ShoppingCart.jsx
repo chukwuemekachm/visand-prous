@@ -23,10 +23,10 @@ const Wrapper = styled.div`
   background-color: ${color.WHITE};
   overflow: scroll;
   display: ${({ displayCart }) => (displayCart ? 'block' : 'none')};
-
   span svg {
     cursor: pointer;
   }
+  z-index: 100!important;
 `;
 
 Wrapper.List = styled.ul`
@@ -34,7 +34,10 @@ Wrapper.List = styled.ul`
   padding: 0em;
 `;
 
-function ShoppingCart({ items, displayCart, handleCartToggle }) {
+function ShoppingCart({
+  items, displayCart, handleCartToggle,
+  handleAddToCart, handleRemoveFromCart,
+}) {
   return (
     <Wrapper displayCart={displayCart}>
       <Icon handleClick={handleCartToggle}>
@@ -48,7 +51,14 @@ function ShoppingCart({ items, displayCart, handleCartToggle }) {
       <Wrapper.List>
         {
           items.length
-            ? items.map(item => (<CartItem key={item.itemId} item={item} />))
+            ? items.map(item => (
+              <CartItem
+                key={item.itemId}
+                item={item}
+                handleAddToCart={handleAddToCart}
+                handleRemoveFromCart={handleRemoveFromCart}
+              />
+            ))
             : ''
         }
       </Wrapper.List>
@@ -77,6 +87,8 @@ ShoppingCart.propTypes = {
   }).isRequired).isRequired,
   displayCart: PropTypes.bool.isRequired,
   handleCartToggle: PropTypes.func.isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
+  handleRemoveFromCart: PropTypes.func.isRequired,
 };
 
 export default ShoppingCart;
