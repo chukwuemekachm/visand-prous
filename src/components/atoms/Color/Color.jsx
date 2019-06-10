@@ -28,6 +28,7 @@ Wrapper.Inner = styled.span`
   height: 1.2em;
   width: 1.2em;
   background-color: ${({ color }) => color};
+  z-index: 1;
 `;
 
 function Color({ color, handleClick, checked }) {

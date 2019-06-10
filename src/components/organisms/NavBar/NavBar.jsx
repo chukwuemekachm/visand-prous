@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { addItemToCart, removeItemFromCart } from '../../../actions/cart';
+
 import SubHeader from '../../atoms/SubHeader/SubHeader';
 import NavLink from '../../molecules/NavLink/NavLink';
 import Title from '../../atoms/Title/Title';
@@ -29,7 +31,6 @@ Wrapper.Nav  = styled.nav`
   background-color: ${color.DARK_SLATE_GREY};
   width: 100%;
   box-sizing: border-box;
-
   a, h2 {
     display: inline-block;
     margin: 0em;
@@ -37,11 +38,9 @@ Wrapper.Nav  = styled.nav`
     letter-spacing: .1em;
     align-self: center;
   }
-
   h3 {
     color: ${color.LAVENDER};
   }
-
   @media (max-width: ${screenSizes.MOBILE}) {
     h3, h3 a {
       width: 100%;
@@ -81,6 +80,7 @@ export class NavBar extends Component {
   handleCartToggle = () => {
     const { items } = this.props;
     if (!items.length) {
+      this.setState({ displayCart: false });
       return toastr.info('You currently have no items in your cart');
     }
     return this.setState(({ displayCart }) => ({ displayCart: !displayCart }));
@@ -95,6 +95,26 @@ export class NavBar extends Component {
       return true;
     } catch (err) {
       console.log(err)
+    }
+  }
+
+  handleAddToCart = async (productId) => {
+    try {
+      const { addItemToCart } = this.props;
+      await addItemToCart({ productId });
+      toastr.success('Successfully added item to cart');
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  handleRemoveFromCart = async (itemId) => {
+    try {
+      const { removeItemFromCart } = this.props;
+      await removeItemFromCart({ itemId });
+      toastr.success('Successfully removed one item from cart');
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -141,6 +161,8 @@ export class NavBar extends Component {
           items={items}
           displayCart={displayCart}
           handleCartToggle={this.handleCartToggle}
+          handleAddToCart={this.handleAddToCart}
+          handleRemoveFromCart={this.handleRemoveFromCart}
         />
       </Wrapper>
     );
@@ -155,6 +177,8 @@ export const mapStateToProps = state => ({
 export const mapDispatchToProps = dispatch => ({
   getCatalog: search => dispatch(getCatalog(search)),
   getCartDetails: () => dispatch(getCartDetails()),
+  addItemToCart: productId => dispatch(addItemToCart(productId)),
+  removeItemFromCart: itemId => dispatch(removeItemFromCart(itemId)),
   logoutUser: () => dispatch(logoutUser()),
 });
 

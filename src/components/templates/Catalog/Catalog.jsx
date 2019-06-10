@@ -21,7 +21,6 @@ import Pagination from '../../organisms/Pagination/Pagination';
 const Wrapper = styled.div`
   width: 95%;
   margin: auto;
-
   .vs-item:last-child {
     justify-self: flex-start!important;
   }
@@ -29,7 +28,7 @@ const Wrapper = styled.div`
 
 export class Catalog extends Component {
   state = {
-    selectedDepartmentId: 1,
+    selectedDepartmentId: 0,
     selectedCategoryId: 0,
 
   };
@@ -37,10 +36,9 @@ export class Catalog extends Component {
   async componentDidMount() {
     try {
       const { getDepartmentCategories, getDepartments, getCatalog } = this.props;
-      const { selectedDepartmentId } = this.state;
       await Promise.all([
         getDepartments(),
-        getDepartmentCategories(selectedDepartmentId),
+        getDepartmentCategories(1),
         getCatalog(),
       ]);
     } catch (err) {
@@ -115,7 +113,7 @@ export const mapStateToProps = state => {
   const products =  state.catalog.paginatedProducts.length
     ? state.catalog.paginatedProducts
     : state.catalog.filteredProducts;
-    
+
   return {
     departments: state.catalog.departments,
     categories: state.catalog.categories,
